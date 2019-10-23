@@ -7,7 +7,7 @@
 (def res 256)
 
 (defn circleify
-  [object radius count]
+  [radius count]
   (let
     [points (range count)
      angle (/ (* 2 Math/PI) count)]
@@ -93,7 +93,7 @@
   (->>
     (difference
       (union
-        ; speaker-holder
+        speaker-holder
         (->>
           grid
           (translate [0 0 -6])))
@@ -101,7 +101,7 @@
     (rotate [0 0 0])))
 
 (def primitives
-  [speaker-cup speaker-clip])
+  [speaker-cup])
 
 (spit "three.scad"
   (write-scad primitives))

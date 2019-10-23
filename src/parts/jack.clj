@@ -1,4 +1,4 @@
-(ns three.jack
+(ns three.parts.jack
   (:use [scad-clj.scad])
   (:use [scad-clj.model]))
 
@@ -34,4 +34,4 @@
     (cylinder 50 200)
     jack))
 
-(def primitives [connector])
+(def primitives [jack])
