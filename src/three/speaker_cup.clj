@@ -1,28 +1,17 @@
 (ns three.speaker-cup
-  (:use [scad-clj.scad])
-  (:use [scad-clj.model]))
+  (:require [scad-clj.model :as model]
+            [three.geometry.circleify :as circleify]
+            [three.parts.registry :as registry]))
 
 (def speaker-radius 26)
 (def speaker-height 8)
 (def res 256)
 
-(defn circleify
-  [radius count]
-  (let
-    [points (range count)
-     angle (/ (* 2 Math/PI) count)]
-    (map
-      (fn [i]
-        (->>
-          object
-          (translate [0 radius 0])
-          (rotate (* i angle) [0 0 1]))) points)))
-
 (defn ring
-  [radius height]
-  (difference
-    (cylinder (+ 3 radius) height)
-    (cylinder radius (+ 2 height))))
+  [radius thickness height]
+  (model/difference
+    (model/cylinder (+ thickness radius) height)
+    (model/cylinder radius (+ 2 height))))
 
 (defn holes
   [radius]
@@ -30,78 +19,74 @@
     [hole-radius (/ radius 13)
      height 10
      holes-count 6]
-     (union
-      (circleify (cylinder hole-radius height) (/ radius 4) holes-count)
+     (model/union
+      (circleify/circleify
+       (/ radius 4)
+       holes-count
+       (model/cylinder hole-radius height))
       (->>
-        (circleify (cylinder hole-radius height) (/ radius 2) holes-count)
-        (rotate [0 0 (/ Math/PI 2)]))
-      (circleify (cylinder (- hole-radius 0.5) height) (/ radius 2) holes-count))))
+        (circleify/circleify
+         (/ radius 2)
+         holes-count
+         (model/cylinder hole-radius height))
+        (model/rotate [0 0 (/ Math/PI 2)]))
+      (circleify/circleify
+       (/ radius 2)
+       holes-count
+       (model/cylinder (- hole-radius 0.5) height)))))
 
 (def grid
-  (with-fn res
-    (difference
-      (cylinder (* 1.5 speaker-radius) 1)
+  (model/with-fn res
+    (model/difference
+      (model/cylinder (* 1.5 speaker-radius) 1)
       (holes speaker-radius)
-      (circleify
-        (cylinder 1.5 5)
-        (+ (/ speaker-radius 3.2) speaker-radius) 6))))
+      (circleify/circleify
+       (+ (/ speaker-radius 3.2) speaker-radius)
+       6
+       (model/cylinder 1.5 5)))))
 
-(def speaker-holder
+(defn speaker-holder
+  []
   (let [
-     rim-width 2
-     rim-height 2
-     rim-radius (- speaker-radius rim-width)
-     mylar-free-height 3
-     upper-height (+ speaker-height rim-height)
-     height (+ upper-height mylar-free-height)
-     rim-z (+ (- (/ rim-height 2) (/ upper-height 2)) (/ mylar-free-height 2))]
-    (println height)
-    (with-fn res
-      (difference
-        (union
-          (ring speaker-radius height)
-          (->>
-            (ring rim-radius rim-height)
-            (translate [0 0 rim-z])))
+        rim-width 2
+        rim-height 2
+        rim-radius (- speaker-radius rim-width)
+        mylar-free-height 3
+        upper-height (+ speaker-height rim-height)
+        height (+ upper-height mylar-free-height)
+        rim-z (+ (- (/ rim-height 2) (/ upper-height 2)) (/ mylar-free-height 2))]
+    (model/with-fn res
+      (model/difference
+       (model/union
+        (ring speaker-radius 3 height)
         (->>
-          (cube 10 20 10)
-          (translate [speaker-radius 0 6])
-          (color [1 0 0]))))))
+         (ring rim-radius 3 rim-height)
+         (model/translate [0 0 rim-z])))
+       (->>
+        (model/cube 10 20 10)
+        (model/translate [speaker-radius 0 6])
+        (model/color [1 0 0]))))))
 
 (def speaker-clip
   (->>
-    (circleify
-      (->>
-        (cube 5 8 5)
-        (translate [0 2.5 5])
-        (color [0 0 1]))
-      speaker-radius 5)
-    (rotate [0 0 (/ Math/PI 10)])))
+    (circleify/circleify
+     speaker-radius
+     5
+     (->>
+      (model/cube 5 8 5)
+      (model/translate [0 2.5 5])
+      (model/color [0 0 1])))
+    (model/rotate [0 0 (/ Math/PI 10)])))
 
-(def speaker-cup
+(registry/defpart
+  :speaker-cup
   (->>
-    (difference
-      (union
-        speaker-holder
-        (->>
-          grid
-          (translate [0 0 -6])))
-      speaker-clip)
-    (rotate [0 0 0])))
-
-(def speaker-cup
-  (->>
-    (difference
-      (union
-        speaker-holder
-        (->>
-          grid
-          (translate [0 0 -6])))
-      speaker-clip)
-    (rotate [0 0 0])))
-
-(def primitives
-  [speaker-cup])
-
-(spit "three.scad"
-  (write-scad primitives))
+   (model/difference
+    (model/union
+     (speaker-holder)
+     (->>
+      grid
+      (model/translate [0 0 -6])))
+    speaker-clip)
+   (model/rotate [0 0 0])
+   (model/color [0.1 0.1 0.1])))

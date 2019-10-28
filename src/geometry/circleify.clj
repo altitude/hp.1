@@ -1,5 +1,5 @@
 (ns three.geometry.circleify
-  (:use scad-clj.model))
+  (:require [scad-clj.model :as model]))
 
 (defn circleify
   [radius count object]
@@ -10,5 +10,5 @@
      (fn [i]
        (->>
         object
-        (translate [0 radius 0])
-        (rotate (* i angle) [0 0 1]))) points)))
+        (model/translate [0 radius 0])
+        (model/rotate (* i angle) [0 0 1]))) points)))
