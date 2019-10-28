@@ -1,10 +1,10 @@
 (ns three.geometry.symmetry
-  (:use scad-clj.model))
+  (:require [scad-clj.model :as model]))
 
 (defn symmetry
   [axis object]
   (when
    (= :x axis)
-    (union
+    (model/union
      object
-     (scale [-1 1 1] object))))
+     (model/scale [-1 1 1] object))))

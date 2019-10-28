@@ -1,19 +1,21 @@
 (ns three.parts.arc-clip
-  (:use [scad-clj.model])
-  (:use [three.components.tube])
-  (:use [three.geometry.symmetry]))
+  (:require [scad-clj.model :as model]
+            [three.components.tube :as tube]
+            [three.geometry.symmetry :as symmetry]
+            [three.parts.registry :as registry]))
 
-(defn arc-clip []
+(registry/defpart
+  :arc-clip
   (let [tube (->>
-              (inner-tube 15 100 8)
-              (rotate [0 (/ Math/PI 9) 0])
-              (translate [60 0 0]))]
+              (tube/inner-tube 15 100 8)
+              (model/rotate [0 (/ Math/PI 9) 0])
+              (model/translate [60 0 0]))]
     (->>
-     (union
+     (model/union
       tube
-      (difference
+      (model/difference
        (->>
-        (cube 80 20 80)
-        (translate [30 0 7]))
-       (hull tube)))
-     (symmetry :x))))
+        (model/cube 80 20 80)
+        (model/translate [30 0 7]))
+       (model/hull tube)))
+     (symmetry/symmetry :x))))

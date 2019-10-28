@@ -1,10 +1,10 @@
 (ns three.components.tube
-  (:use scad-clj.model))
+  (:require [scad-clj.model :as model]))
 
 (defn inner-tube
   [radius height thickness]
   (let
    [outer-radius (+ radius thickness)]
-    (difference
-     (cylinder outer-radius height)
-     (cylinder radius (+ 2 height)))))
+    (model/difference
+     (model/cylinder outer-radius height)
+     (model/cylinder radius (+ 2 height)))))
