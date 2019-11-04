@@ -79,6 +79,10 @@
     (model/rotate [0 0 (/ Math/PI 10)])))
 
 (registry/defpart
+  :speaker-clip
+  speaker-clip)
+
+(registry/defpart
   :speaker-cup
   (->>
    (model/difference

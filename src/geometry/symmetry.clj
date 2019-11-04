@@ -3,8 +3,11 @@
 
 (defn symmetry
   [axis object]
-  (when
-   (= :x axis)
+  (let [scale (case axis
+                :x [-1 1 1]
+                :y [1 -1 1]
+                :z [1 1 -1]
+                [1 1 1])]
     (model/union
      object
-     (model/scale [-1 1 1] object))))
+     (model/scale scale object))))

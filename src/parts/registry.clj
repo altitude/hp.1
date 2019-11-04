@@ -17,3 +17,8 @@
   (do
     (swap! parts assoc name value)
     (write)))
+
+(defn reset
+  []
+  (swap! parts empty)
+  (write))

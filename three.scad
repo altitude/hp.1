@@ -1,75 +1,154 @@
-color ([0.1, 0.1, 0.1, ]) {
-  translate ([0, 0, 3]) {
-    difference () {
-      union () {
+color ([1, 1, 1, ]) {
+  difference () {
+    translate ([0, 0, 3]) {
+      difference () {
         difference () {
-          hull () {
-            cylinder (h=1, r=39, center=true);
-            translate ([0, 0, 13]) {
-              cylinder (h=1, r=30, center=true);
+          union () {
+            difference () {
+              hull () {
+                cylinder ($fn=128, h=1, r=39, center=true);
+                rotate (a=0.0, v=[0, 0, 1]) {
+                  translate ([0, 30, 0]) {
+                    translate ([0, 0, 13]) {
+                      sphere ($fn=64, r=6);
+                    }
+                  }
+                }
+                rotate (a=59.99999999999999, v=[0, 0, 1]) {
+                  translate ([0, 30, 0]) {
+                    translate ([0, 0, 13]) {
+                      sphere ($fn=64, r=6);
+                    }
+                  }
+                }
+                rotate (a=119.99999999999999, v=[0, 0, 1]) {
+                  translate ([0, 30, 0]) {
+                    translate ([0, 0, 13]) {
+                      sphere ($fn=64, r=6);
+                    }
+                  }
+                }
+                rotate (a=180.0, v=[0, 0, 1]) {
+                  translate ([0, 30, 0]) {
+                    translate ([0, 0, 13]) {
+                      sphere ($fn=64, r=6);
+                    }
+                  }
+                }
+                rotate (a=239.99999999999997, v=[0, 0, 1]) {
+                  translate ([0, 30, 0]) {
+                    translate ([0, 0, 13]) {
+                      sphere ($fn=64, r=6);
+                    }
+                  }
+                }
+                rotate (a=299.99999999999994, v=[0, 0, 1]) {
+                  translate ([0, 30, 0]) {
+                    translate ([0, 0, 13]) {
+                      sphere ($fn=64, r=6);
+                    }
+                  }
+                }
+              }
+              color ([0, 0, 1, 0.6]) {
+                translate ([0, 0, -1]) {
+                  scale ([0.95, 0.95, 0.95]) {
+                    hull () {
+                      cylinder ($fn=128, h=1, r=39, center=true);
+                      rotate (a=0.0, v=[0, 0, 1]) {
+                        translate ([0, 30, 0]) {
+                          translate ([0, 0, 13]) {
+                            sphere ($fn=64, r=6);
+                          }
+                        }
+                      }
+                      rotate (a=59.99999999999999, v=[0, 0, 1]) {
+                        translate ([0, 30, 0]) {
+                          translate ([0, 0, 13]) {
+                            sphere ($fn=64, r=6);
+                          }
+                        }
+                      }
+                      rotate (a=119.99999999999999, v=[0, 0, 1]) {
+                        translate ([0, 30, 0]) {
+                          translate ([0, 0, 13]) {
+                            sphere ($fn=64, r=6);
+                          }
+                        }
+                      }
+                      rotate (a=180.0, v=[0, 0, 1]) {
+                        translate ([0, 30, 0]) {
+                          translate ([0, 0, 13]) {
+                            sphere ($fn=64, r=6);
+                          }
+                        }
+                      }
+                      rotate (a=239.99999999999997, v=[0, 0, 1]) {
+                        translate ([0, 30, 0]) {
+                          translate ([0, 0, 13]) {
+                            sphere ($fn=64, r=6);
+                          }
+                        }
+                      }
+                      rotate (a=299.99999999999994, v=[0, 0, 1]) {
+                        translate ([0, 30, 0]) {
+                          translate ([0, 0, 13]) {
+                            sphere ($fn=64, r=6);
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
             }
-          }
-          color ([0, 0, 1, 0.6]) {
-            translate ([0, 0, -1]) {
-              scale ([0.95, 0.95, 0.95]) {
-                hull () {
-                  cylinder (h=1, r=39, center=true);
-                  translate ([0, 0, 13]) {
-                    cylinder (h=1, r=30, center=true);
+            translate ([0, 0, -2]) {
+              difference () {
+                cylinder ($fn=128, h=3, r=39, center=true);
+                cylinder ($fn=128, h=4, r=29.5, center=true);
+                rotate (a=0.0, v=[0, 0, 1]) {
+                  translate ([0, 33, 0]) {
+                    cylinder ($fn=16, h=4, r=1.5, center=true);
+                  }
+                }
+                rotate (a=59.99999999999999, v=[0, 0, 1]) {
+                  translate ([0, 33, 0]) {
+                    cylinder ($fn=16, h=4, r=1.5, center=true);
+                  }
+                }
+                rotate (a=119.99999999999999, v=[0, 0, 1]) {
+                  translate ([0, 33, 0]) {
+                    cylinder ($fn=16, h=4, r=1.5, center=true);
+                  }
+                }
+                rotate (a=180.0, v=[0, 0, 1]) {
+                  translate ([0, 33, 0]) {
+                    cylinder ($fn=16, h=4, r=1.5, center=true);
+                  }
+                }
+                rotate (a=239.99999999999997, v=[0, 0, 1]) {
+                  translate ([0, 33, 0]) {
+                    cylinder ($fn=16, h=4, r=1.5, center=true);
+                  }
+                }
+                rotate (a=299.99999999999994, v=[0, 0, 1]) {
+                  translate ([0, 33, 0]) {
+                    cylinder ($fn=16, h=4, r=1.5, center=true);
                   }
                 }
               }
             }
           }
-        }
-        translate ([0, 0, -2]) {
-          difference () {
-            cylinder (h=3, r=39, center=true);
-            cylinder ($fn=64, h=4, r=29.5, center=true);
-            rotate (a=0.0, v=[0, 0, 1]) {
-              translate ([0, 33, 0]) {
-                cylinder ($fn=16, h=4, r=1.5, center=true);
-              }
-            }
-            rotate (a=59.99999999999999, v=[0, 0, 1]) {
-              translate ([0, 33, 0]) {
-                cylinder ($fn=16, h=4, r=1.5, center=true);
-              }
-            }
-            rotate (a=119.99999999999999, v=[0, 0, 1]) {
-              translate ([0, 33, 0]) {
-                cylinder ($fn=16, h=4, r=1.5, center=true);
-              }
-            }
-            rotate (a=180.0, v=[0, 0, 1]) {
-              translate ([0, 33, 0]) {
-                cylinder ($fn=16, h=4, r=1.5, center=true);
-              }
-            }
-            rotate (a=239.99999999999997, v=[0, 0, 1]) {
-              translate ([0, 33, 0]) {
-                cylinder ($fn=16, h=4, r=1.5, center=true);
-              }
-            }
-            rotate (a=299.99999999999994, v=[0, 0, 1]) {
-              translate ([0, 33, 0]) {
-                cylinder ($fn=16, h=4, r=1.5, center=true);
-              }
+          translate ([36, 0, 6]) {
+            rotate ([0.0,90.0,0.0]) {
+              cylinder ($fn=64, h=10, r=2.5, center=true);
             }
           }
         }
       }
-      translate ([50, 0, 0]) {
-        cube ([100, 100, 100], center=true);
-      }
     }
-  }
-}
-color ([0.3, 0.2, 0.09, ]) {
-  translate ([0, 0, -2.99]) {
-    difference () {
-      cylinder ($fn=64, h=5, r=39, center=true);
-      cylinder ($fn=64, h=7, r=30, center=true);
+    translate ([500, 0, 0]) {
+      cube ([1000, 1000, 1000], center=true);
     }
   }
 }
@@ -276,35 +355,11 @@ color ([0.1, 0.1, 0.1, ]) {
     }
   }
 }
-color ([1, 0, 0, ]) {
-  rotate (a=0.0, v=[0, 0, 1]) {
-    translate ([0, 33, 0]) {
-      cylinder ($fn=32, h=40, r=1.5, center=true);
-    }
-  }
-  rotate (a=59.99999999999999, v=[0, 0, 1]) {
-    translate ([0, 33, 0]) {
-      cylinder ($fn=32, h=40, r=1.5, center=true);
-    }
-  }
-  rotate (a=119.99999999999999, v=[0, 0, 1]) {
-    translate ([0, 33, 0]) {
-      cylinder ($fn=32, h=40, r=1.5, center=true);
-    }
-  }
-  rotate (a=180.0, v=[0, 0, 1]) {
-    translate ([0, 33, 0]) {
-      cylinder ($fn=32, h=40, r=1.5, center=true);
-    }
-  }
-  rotate (a=239.99999999999997, v=[0, 0, 1]) {
-    translate ([0, 33, 0]) {
-      cylinder ($fn=32, h=40, r=1.5, center=true);
-    }
-  }
-  rotate (a=299.99999999999994, v=[0, 0, 1]) {
-    translate ([0, 33, 0]) {
-      cylinder ($fn=32, h=40, r=1.5, center=true);
+color ([0.3, 0.2, 0.09, ]) {
+  translate ([0, 0, -2.99]) {
+    difference () {
+      cylinder ($fn=64, h=5, r=39, center=true);
+      cylinder ($fn=64, h=7, r=30, center=true);
     }
   }
 }
