@@ -2,9 +2,17 @@
   (:require [scad-clj.model :as model]))
 
 (defn slicethrough
-  [part]
-  (model/difference
-   part
-   (->>
-    (model/cube 1000 1000 1000)
-    (model/translate [500 0 0]))))
+  ([part]
+  (slicethrough :x part))
+  ([axis part]
+   (let [size 1000
+         unit (- (/ size 2))
+         translation (case axis
+                       :x [unit 0 0]
+                       :y [0 unit 0]
+                       :z [0 0 unit])]
+     (model/difference
+      part
+      (->>
+        (model/cube size size size)
+        (model/translate translation))))))

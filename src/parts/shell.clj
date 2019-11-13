@@ -2,7 +2,8 @@
   (:require [scad-clj.model :as model]
             [three.parts.registry :as registry]
             [three.geometry.circleify :as circleify]
-            [three.geometry.slicethrough :refer (slicethrough)]))
+            [three.geometry.slicethrough :refer (slicethrough)]
+            [three.geometry.torus :refer (torus)]))
 
 (registry/defpart
   :shell
@@ -10,10 +11,15 @@
         shell (->>
               ;  (model/cylinder (- radius 9) 1)
               ;  (model/translate [0 0 13])
-               (model/sphere 6)
-               (model/with-fn 64)
-               (model/translate [0 0 13])
-               (circleify/circleify (- radius 9) 6)
+              ;  
+              ;  (model/sphere 6)
+              ;  (model/with-fn 64)
+              ;  (model/translate [0 0 13])
+              ;  (circleify/circleify (- radius 9) 6)
+              ; 
+               (torus 15 22) 
+               (model/with-fn 128)
+               (slicethrough :z)
                (model/hull
                 (->>
                  (model/cylinder radius 1)
@@ -29,8 +35,14 @@
           (->>
            shell
            (model/scale [0.95 0.95 0.95])
-           (model/translate [0 0 -1])
-           (model/color [0 0 1 0.6]))))
+           (model/translate [0 0 -1]))
+          (->>
+           (model/cylinder 24 100)
+           (model/with-fn 128))
+          (->>
+           (model/cylinder 25.5 2)
+           (model/with-fn 128)
+           (model/translate [0 0 12.7]))))
          ;  attach ring
         (->>
          (model/difference
@@ -44,14 +56,22 @@
            (model/cylinder 1.5 4)
            (circleify/circleify 33 6)
            (model/with-fn 16)))
-         (model/translate [0 0 -2])))
+         (model/translate [0 0 -2]))
+        ; glass mount
+        ; (->>
+        ;  (model/cylinder 3 2)
+        ;  (model/with-fn 64)
+        ;  (circleify/circleify 25 12)
+        ;  (model/translate [0 0 11.5]))
+        )
+      ;  jack hole
        (->>
-        (model/cylinder 2.5 10)
+        (model/cylinder 2.6 200)
         (model/with-fn 64)
         (model/rotate [0 (/ Math/PI 2) 0])
-        (model/translate [36 0 6]))))
+        (model/translate [0 0 6]))))
      (model/translate [0 0 3])
-     (slicethrough)
+    ;  (slicethrough :x)
      (model/color [1 1 1]))))
 
 (registry/defpart
@@ -67,3 +87,13 @@
   (->>
    (model/cylinder 10 4)
    (model/translate [0 0 17])))
+
+; (registry/defpart
+;   :test-torus
+;   (->>
+;    (model/circle 10)
+;    (model/translate [30 10 0])
+;    (model/extrude-rotate)
+;    (model/hull)
+;    (model/translate [0 0 -10])
+;    (slicethrough :z)))
