@@ -3,7 +3,9 @@
             [three.parts.registry :as registry]
             [three.geometry.circleify :as circleify]
             [three.geometry.slicethrough :refer (slicethrough)]
-            [three.geometry.torus :refer (torus)]))
+            [three.geometry.torus :refer (torus)]
+            [three.components.tube :as tube]
+            [three.geometry.bias-cut :refer (bias-cut)]))
 
 (registry/defpart
   :shell
@@ -71,7 +73,7 @@
         (model/rotate [0 (/ Math/PI 2) 0])
         (model/translate [0 0 6]))))
      (model/translate [0 0 3])
-    ;  (slicethrough :x)
+     (slicethrough :y)
      (model/color [1 1 1]))))
 
 (registry/defpart
@@ -87,6 +89,40 @@
   (->>
    (model/cylinder 10 4)
    (model/translate [0 0 17])))
+
+(registry/defpart
+  :jack-hole-joint
+  (->>
+   (model/union
+    (->>
+     (tube/outer-tube 2.6 100 0.5)
+     (model/with-fn 128)
+     (bias-cut 1 (/ Math/PI 3)))
+    (->>
+     (tube/inner-tube 2.6 100 0.5)
+     (model/with-fn 128)
+     (bias-cut 1 (/ Math/PI 3.1))
+     (model/translate [0 0 -0.5])))
+   (model/rotate [0 (/ Math/PI 2) 0])
+   (model/translate [33 0 9])))
+
+(registry/defpart
+  :wire-hole-joint
+  (->>
+   (model/union
+    (->>
+     (tube/outer-tube 2.6 100 1.5)
+     (model/with-fn 128)
+     (bias-cut 3.5 (/ Math/PI 3))
+     (model/translate [0 0 1]))
+    (->>
+     (tube/inner-tube 2.6 100 0.5)
+     (model/with-fn 128)
+     (bias-cut 1 (/ Math/PI 3.1))
+     (model/translate [0 0 -0.5])))
+   (model/rotate [0 (/ Math/PI 2) 0])
+   (model/translate [33 0 9])
+   (model/scale [-1 1 1])))
 
 ; (registry/defpart
 ;   :test-torus

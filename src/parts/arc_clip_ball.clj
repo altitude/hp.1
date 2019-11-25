@@ -12,7 +12,7 @@
     (->>
      (model/sphere 12)
      (slicethrough :z)
-     (model/with-fn 64))
+     (model/with-fn 128))
     (->>
      (->>
       (model/cylinder 1 100)

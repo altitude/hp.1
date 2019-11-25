@@ -8,3 +8,7 @@
     (model/difference
      (model/cylinder outer-radius height)
      (model/cylinder radius (+ 2 height)))))
+
+(defn outer-tube
+  [radius height thickness]
+  (inner-tube (- radius thickness) height thickness))
