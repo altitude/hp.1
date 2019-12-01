@@ -72,7 +72,7 @@
         (model/with-fn 64)
         (model/rotate [0 (/ Math/PI 2) 0])
         (model/translate [0 0 6]))))
-     (model/translate [0 0 3])
+     (model/translate [0 0 15])
      (slicethrough :y)
      (model/color [1 1 1]))))
 
