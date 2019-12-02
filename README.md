@@ -4,6 +4,8 @@ This repository contains the source code of HP.1, an attempt to build open-sourc
 
 ![alpha.1](doc/iterations/alpha.1.png)
 
+[Subscribe to project updates](https://gmail.us4.list-manage.com/subscribe?u=59b682403ba420c9602754e76&id=9977247b39)
+
 ## Philosophy
 
 The main focus of HP.1 is to build headphones that are easy to assemble and repair, not costing its weight in gold, whislt also setting a high bar for their look & feel.
